@@ -15,17 +15,13 @@ const start = Date.now()
 
 let sqin = 0
 let rect = {}
-for (let y = 0; y < 1000; y++) {
-  for (let x = 0; x < 1000; x++) {
-    for (let claim of claims) {
-      let xBounds = x >= claim.x && x < claim.x + claim.w
-      let yBounds = y >= claim.y && y < claim.y + claim.h
-      if (xBounds && yBounds) {
-        let pos = `${x},${y}`
-        if (rect[pos] == null) rect[pos] = 1
-        else rect[pos]++
-        if (rect[pos] === 2) sqin++
-      }
+for (let claim of claims) {
+  for (let x = claim.x; x < claim.x + claim.w; x++) {
+    for (let y = claim.y; y < claim.y + claim.h; y++) {
+      let pos = `${x},${y}`
+      if (rect[pos] == null) rect[pos] = 1
+      else rect[pos]++
+      if (rect[pos] === 2) sqin++
     }
   }
 }
