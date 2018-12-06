@@ -2,6 +2,7 @@ console.log('\x1b[7m Day 5, 2018 \x1b[0m')
 const path = require('path')
 const fs = require('fs')
 const polymer = fs.readFileSync(path.join(__dirname, '../inputs/5.txt')).toString() 
+const start = Date.now()
 
 function react (polymer, reactions) {
   let changes
@@ -22,10 +23,11 @@ function react (polymer, reactions) {
 
 let reactions = []
 let firstReaction = react(polymer,  reactions)
-console.log(firstReaction.length)
+console.log('Part 1: %s', firstReaction.length)
 
 let reactionsMagnitudes = reactions.map(unit => {
   let p = polymer.replace(new RegExp(unit, 'ig'), '')
   return react(p).length
 })
-console.log(Math.min(...reactionsMagnitudes))
+console.log('Part 2: %s', Math.min(...reactionsMagnitudes))
+console.log('(%sms)', Date.now() - start)
